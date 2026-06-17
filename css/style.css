@@ -1,0 +1,428 @@
+@import url('https://fonts.googleapis.com/css2?family=72:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* SAP Fiori Horizon (Morning Horizon) inspired palette */
+  --sapBackgroundColor: #f5f6f7;
+  --sapBaseColor: #ffffff;
+  --sapTextColor: #1d2d3e;
+  --sapTextSecondaryColor: #556b82;
+  --sapBrandColor: #0070f2;
+  --sapBrandColorHover: #005cc2;
+  --sapHighlightColor: #e5f0fa;
+  --sapShellColor: #1b2631; /* Dark shell */
+  --sapShellTextColor: #ffffff;
+  --sapBorderColor: #d9d9d9;
+  --sapBorderRadius: 0.75rem; /* Horizon has softer corners */
+  --sapTileRadius: 0.75rem;
+  --sapShadow: 0 0.125rem 0.25rem 0 rgba(0,0,0,0.08), 0 0.25rem 0.5rem 0 rgba(0,0,0,0.04);
+  --sapShadowHover: 0 0.25rem 0.5rem 0 rgba(0,0,0,0.12), 0 0.5rem 1rem 0 rgba(0,0,0,0.08);
+  --sapFontFamily: 'Inter', '72', 'Segoe UI', Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--sapFontFamily);
+  background-color: var(--sapBackgroundColor);
+  color: var(--sapTextColor);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Shell Bar */
+.fiori-shellbar {
+  background-color: var(--sapShellColor);
+  color: var(--sapShellTextColor);
+  height: 48px;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.shellbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.shellbar-title {
+  margin-left: 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ccc;
+}
+
+.shellbar-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 1rem;
+}
+
+.shellbar-actions a {
+  color: var(--sapShellTextColor);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s;
+}
+
+.shellbar-actions a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Page Container */
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 2rem 4rem; /* Accounts for shellbar */
+}
+
+/* Object Header */
+.object-header {
+  background-color: var(--sapBaseColor);
+  border-radius: var(--sapBorderRadius);
+  box-shadow: var(--sapShadow);
+  padding: 2.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.object-header-avatar {
+  width: 120px;
+  height: 120px;
+  background-color: var(--sapHighlightColor);
+  color: var(--sapBrandColor);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.object-header-content h2 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--sapTextSecondaryColor);
+  margin-bottom: 0.25rem;
+}
+
+.object-header-content h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--sapTextColor);
+}
+
+.object-header-content h3 {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--sapBrandColor);
+  margin-bottom: 1rem;
+}
+
+.object-header-content p {
+  color: var(--sapTextSecondaryColor);
+  margin-bottom: 1.5rem;
+  max-width: 600px;
+}
+
+.object-header-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Buttons */
+.btn-emphasized {
+  background-color: var(--sapBrandColor);
+  color: white;
+  border: none;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-emphasized:hover {
+  background-color: var(--sapBrandColorHover);
+}
+.btn-emphasized:active {
+  transform: scale(0.98);
+}
+
+.btn-transparent {
+  background-color: transparent;
+  color: var(--sapBrandColor);
+  border: 1px solid var(--sapBrandColor);
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-transparent:hover {
+  background-color: var(--sapHighlightColor);
+}
+.btn-transparent:active {
+  transform: scale(0.98);
+}
+
+.btn-small {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+}
+
+/* Tiles Container */
+.tile-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.fiori-tile {
+  background-color: var(--sapBaseColor);
+  border-radius: var(--sapTileRadius);
+  box-shadow: var(--sapShadow);
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  height: 140px;
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s;
+  border: 1px solid transparent;
+}
+
+.fiori-tile:hover {
+  box-shadow: var(--sapShadowHover);
+  transform: translateY(-2px);
+  border-color: var(--sapHighlightColor);
+}
+
+.tile-header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: auto;
+}
+
+.tile-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--sapTextColor);
+}
+
+.tile-subtitle {
+  font-size: 0.75rem;
+  color: var(--sapTextSecondaryColor);
+  margin-top: 0.25rem;
+}
+
+.tile-content {
+  margin-top: 1rem;
+}
+
+.kpi-value {
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--sapBrandColor);
+  line-height: 1;
+}
+
+/* Content Grid */
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.grid-span-full {
+  grid-column: 1 / -1;
+}
+
+/* Fiori Cards */
+.fiori-card {
+  background-color: var(--sapBaseColor);
+  border-radius: var(--sapBorderRadius);
+  box-shadow: var(--sapShadow);
+  overflow: hidden;
+}
+
+.card-header {
+  padding: 1.5rem 1.5rem 1rem;
+  border-bottom: 1px solid var(--sapBorderColor);
+}
+
+.card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--sapTextColor);
+}
+
+.card-content {
+  padding: 1.5rem;
+}
+
+/* Lists */
+.info-list {
+  list-style: none;
+  margin-top: 1rem;
+}
+
+.info-list li {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.info-list strong {
+  display: inline-block;
+  width: 80px;
+  color: var(--sapTextSecondaryColor);
+}
+
+/* Timeline */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 1.5rem;
+  border-left: 2px solid var(--sapHighlightColor);
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--sapBrandColor);
+}
+
+.timeline-date {
+  font-size: 0.8rem;
+  color: var(--sapTextSecondaryColor);
+  margin-bottom: 0.25rem;
+}
+
+.timeline-title {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.timeline-company {
+  font-size: 0.9rem;
+  color: var(--sapBrandColor);
+  margin-bottom: 0.5rem;
+}
+
+.timeline-desc {
+  font-size: 0.9rem;
+  color: var(--sapTextSecondaryColor);
+}
+
+/* Badges */
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.badge {
+  background-color: var(--sapHighlightColor);
+  color: var(--sapBrandColor);
+  padding: 0.3rem 0.6rem;
+  border-radius: 1rem; /* pill shape */
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* Projects */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.project-item {
+  border: 1px solid var(--sapBorderColor);
+  border-radius: var(--sapBorderRadius);
+  padding: 1.5rem;
+  transition: border-color 0.2s;
+}
+
+.project-item:hover {
+  border-color: var(--sapBrandColor);
+}
+
+.project-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.project-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.project-desc {
+  font-size: 0.9rem;
+  color: var(--sapTextSecondaryColor);
+  margin-bottom: 1rem;
+}
+
+/* Footer */
+.fiori-footer {
+  text-align: center;
+  padding: 2rem;
+  color: var(--sapTextSecondaryColor);
+  font-size: 0.875rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .object-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .object-header-actions {
+    justify-content: center;
+  }
+  
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .shellbar-actions {
+    display: none;
+  }
+}
