@@ -9,20 +9,46 @@ document.addEventListener('DOMContentLoaded', () => {
       
       const targetElement = document.querySelector(targetId);
       if (targetElement) {
-        // Offset for the fixed shellbar
-        const offset = 60;
+        // Calculate position to center the element in the viewport
         const bodyRect = document.body.getBoundingClientRect().top;
         const elementRect = targetElement.getBoundingClientRect().top;
         const elementPosition = elementRect - bodyRect;
-        const offsetPosition = elementPosition - offset;
+        
+        const elementHeight = targetElement.offsetHeight;
+        const viewportHeight = window.innerHeight;
+        
+        let offsetPosition = elementPosition - (viewportHeight / 2) + (elementHeight / 2);
+        
+        // If element is very tall, align it near the top instead of center so the header isn't hidden
+        if (elementHeight > viewportHeight * 0.8) {
+          offsetPosition = elementPosition - (viewportHeight * 0.15);
+        }
 
         window.scrollTo({
           top: offsetPosition,
           behavior: 'smooth'
         });
+
+        // Highlight the target section for visibility
+        document.querySelectorAll('.highlight-active').forEach(el => el.classList.remove('highlight-active'));
+        if (targetElement.classList.contains('fiori-card')) {
+          targetElement.classList.add('highlight-active');
+        }
       }
     });
   });
+
+  // Remove highlight on manual interaction
+  const clearHighlights = () => {
+    document.querySelectorAll('.highlight-active').forEach(el => {
+      el.classList.remove('highlight-active');
+    });
+  };
+
+  window.addEventListener('wheel', clearHighlights, { passive: true });
+  window.addEventListener('touchmove', clearHighlights, { passive: true });
+  window.addEventListener('mousedown', clearHighlights);
+  window.addEventListener('keydown', clearHighlights);
 
   // Shellbar shadow on scroll
   const shellbar = document.querySelector('.fiori-shellbar');
@@ -49,17 +75,22 @@ function openModal(src) {
 function closeModal() {
   const modal = document.getElementById('imageModal');
   if (modal) {
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto'; // Restore background scrolling
+    modal.classList.add('closing');
+    setTimeout(() => {
+      modal.style.display = 'none';
+      modal.classList.remove('closing');
+      document.body.style.overflow = 'auto'; // Restore background scrolling
+    }, 280); // Wait for the 0.3s fadeOut animation to finish
   }
 }
 
-// Close modal when clicking outside the image
+// Close modal when clicking outside or on the image
 document.addEventListener('DOMContentLoaded', () => {
   const modal = document.getElementById('imageModal');
   if (modal) {
     modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
+      // Close if clicking the background overlay or the image itself
+      if (e.target === modal || e.target.id === 'modalImage') {
         closeModal();
       }
     });
